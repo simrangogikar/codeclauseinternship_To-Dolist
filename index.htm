@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO list</title>
+</head>
+ <style>
+
+
+        body {
+            background-color: #778899;
+        }
+
+            .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color:	#90ee90;
+            border-radius: 4px;
+            padding: 20px;
+            align-items: centre;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 200px;
+        
+        }
+
+        h1 {
+            text-align: left;
+            color: #778899;
+        }
+
+        ul {
+            list-style-type: square;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: centre;
+            padding: 10px 0;
+            border-bottom: 2px solid #FFFE0;}
+        .task-text {
+            flex: 1;
+        }
+
+        .task-actions {
+            margin-left: 10px;
+        }
+
+        .task-actions button {
+            padding: 20px x 20px;
+            background-color: #C0C0C1;
+            color: #4682B4;
+            border-style: solid;
+            border-color: #696969;
+            border-radius: 3px;
+            cursor: pointer;
+            
+            
+        }
+        button{
+            margin-top: 20px;
+            padding-left: 10px;
+            cursor: pointer;
+            color: #778899;
+
+            padding-right:10px ;
+        }
+
+        .task-actions button:hover {
+            background-color: #666;
+        }
+
+        .task-input {
+            width: 90%;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-do List</h1>
+        <ul id="task-list">
+            <!-- Tasks will be added here -->
+        </ul>
+        <input type="text" id="new-task" class="task-input" placeholder="what do i wanna do!">
+        <button id="add-task">Add</button>
+    </div>
+
+    <script>
+        const taskList = document.getElementById("task-list");
+        const newTaskInput = document.getElementById("new-task");
+        const addTaskButton = document.getElementById("add-task");
+
+        addTaskButton.addEventListener("click", () => {
+            const taskText = newTaskInput.value.trim();
+            if (taskText !== "") {
+                const taskItem = document.createElement("li");
+                taskItem.innerHTML = `
+                    <span class="task-text">${taskText}</span>
+                    <span class="task-actions">
+                        <button class="delete-task">Delete</button>
+                    </span>
+                `;
+                taskList.appendChild(taskItem);
+                newTaskInput.value = "";
+            }
+        });
+
+        taskList.addEventListener("click", (e) => {
+            if (e.target.classList.contains("delete-task")) {
+                const taskItem = e.target.closest("li");
+                taskItem.remove();
+            }
+        });
+    </script>
+</body>
+</html>
